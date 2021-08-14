@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Ogrenci Listesi";
+    ViewData["Desc"] = "Kursumuza kayıtlı öğrencilerin listesi";    
+}
+@model IEnumerable<Ogrenci>
+<h1>Ogrenci Listesi</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Numara</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ogrenciid</td>
+                <td>@item.Numara</td>
+                <td>@item.Ad</td>
+                <td>@item.Soyad</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{ 
+
+}
