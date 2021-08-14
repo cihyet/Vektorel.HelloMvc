@@ -22,9 +22,13 @@ namespace Vektorel.HelloMvc.Controllers
             lst.Add(new Ogrenci { Ad = "Osman", Soyad = "Yılmaz", Numara = 789 });
 
             //ViewData["liste"] = lst;
-            //ViewBag.liste = lst;   
-            //return View("OgrenciListesi",lst);
+            //ViewBag.liste = lst; 
             return View(lst);
+        }
+
+        public IActionResult OgrenciEkle()
+        {
+            return View();
         }
 
         
