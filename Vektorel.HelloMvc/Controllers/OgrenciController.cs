@@ -17,20 +17,29 @@ namespace Vektorel.HelloMvc.Controllers
         public IActionResult OgrenciListesi()
         {
             var lst = new List<Ogrenci>();
-            lst.Add(new Ogrenci { Ad = "Ahmet", Soyad = "Mehmet", Numara = 123 });
-            lst.Add(new Ogrenci { Ad = "Ali", Soyad = "Veli", Numara = 345 });
-            lst.Add(new Ogrenci { Ad = "Osman", Soyad = "Yılmaz", Numara = 789 });
+            
 
             //ViewData["liste"] = lst;
             //ViewBag.liste = lst; 
             return View(lst);
         }
 
-        public IActionResult OgrenciEkle()
+
+        [HttpPost]
+        public IActionResult OgrenciEkle(Ogrenci ogr)
         {
+            using (OkulMvcContext ctx=new OkulMvcContext())
+            {             
+                ctx.Ogrenciler.Add(ogr);
+                ctx.SaveChanges();                
+            }
             return View();
         }
 
-        
+
+        public IActionResult OgrenciEkle() => View();
+       
+
+
     }
 }

@@ -2,23 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Vektorel.EfApp;
+using Vektorel.HelloMvc.Models;
 
-namespace Vektorel.EfApp.Migrations
+namespace Vektorel.HelloMvc.Migrations
 {
-    [DbContext(typeof(OkulContext))]
-    partial class OkulContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(OkulMvcContext))]
+    [Migration("20210815082027_OkulDbMvcInit")]
+    partial class OkulDbMvcInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
+                .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Vektorel.EfApp.Ogrenci", b =>
+            modelBuilder.Entity("Vektorel.HelloMvc.Models.Ogrenci", b =>
                 {
                     b.Property<int>("Ogrenciid")
                         .ValueGeneratedOnAdd()
@@ -35,8 +37,8 @@ namespace Vektorel.EfApp.Migrations
 
                     b.Property<string>("Soyad")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.HasKey("Ogrenciid");
 

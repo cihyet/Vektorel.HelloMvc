@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "OgrenciEkle";
+}
+@model Ogrenci
+
+<h1>Öğrenci Ekle</h1>
+
+<form action="/Ogrenci/OgrenciEkle" method="post">
+    <label>Ad</label>
+    <input type="text" name="Ad" value="" />
+
+    <label>Soyad</label>
+    <input type="text" name="Soyad" value="" />
+
+    <label>Numara</label>
+    <input type="text" name="Numara" value="" />
+
+    <input type="submit" name="btnKaydet" value="Kaydet" />
+</form>

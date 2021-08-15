@@ -21,8 +21,10 @@ namespace Vektorel.EfApp
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {//Fluent Api
             modelBuilder.Entity<Ogrenci>().ToTable("tblOgrenciler");
-            modelBuilder.Entity<Ogrenci>().Property(o => o.Ad).HasColumnType("varchar").HasMaxLength(30).IsRequired();
+            modelBuilder.Entity<Ogrenci>().Property(o => o.Ad).HasColumnType("varchar").HasMaxLength(25).IsRequired();
             modelBuilder.Entity<Ogrenci>().Property(o => o.Soyad).HasColumnType("varchar").HasMaxLength(50).IsRequired();
         }
     }
+
+   
 }
