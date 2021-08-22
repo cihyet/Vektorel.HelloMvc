@@ -6,15 +6,19 @@
 
 <h1>Öğrenci Ekle</h1>
 
-<form action="/Ogrenci/OgrenciEkle" method="post">
-    <label>Ad</label>
-    <input type="text" name="Ad" value="" />
+Html Helpers
+<form asp-action="OgrenciEkle" asp-controller="Ogrenci" method="post">
 
-    <label>Soyad</label>
-    <input type="text" name="Soyad" value="" />
+    @*<input type="text" asp-for="Ad" class="form-control"/>*@
 
-    <label>Numara</label>
-    <input type="text" name="Numara" value="" />
+    @Html.LabelFor(o => o.Ad,"Adı",new {@class= "form-label" })
+    @Html.TextBoxFor(o => o.Ad,null,new { @class = "form-control"})
 
-    <input type="submit" name="btnKaydet" value="Kaydet" />
+    @Html.LabelFor(o => o.Soyad,"Soyadı",new {@class="form-label" })
+    @Html.TextBoxFor(o => o.Soyad,null,new {@class="form-control" })
+
+    @Html.LabelFor(o => o.Numara,"Numarası", new { @class = "form-label" })
+    @Html.TextBoxFor(o => o.Numara, null, new { @class = "form-control" })
+
+    <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-success" />
 </form>

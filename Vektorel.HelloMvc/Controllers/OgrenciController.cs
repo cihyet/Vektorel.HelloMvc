@@ -16,29 +16,32 @@ namespace Vektorel.HelloMvc.Controllers
 
         public IActionResult OgrenciListesi()
         {
-            var lst = new List<Ogrenci>();
-            
-
-            //ViewData["liste"] = lst;
-            //ViewBag.liste = lst; 
+            IEnumerable<Ogrenci> lst;
+            using (var ctx = new OkulMvcContext())
+            {
+                lst = ctx.Ogrenciler.ToList();
+            }           
             return View(lst);
         }
 
-
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult OgrenciEkle(Ogrenci ogr)
         {
-            using (OkulMvcContext ctx=new OkulMvcContext())
-            {             
+            using (OkulMvcContext ctx = new OkulMvcContext())
+            {
                 ctx.Ogrenciler.Add(ogr);
-                ctx.SaveChanges();                
+                ctx.SaveChanges();
             }
             return View();
         }
 
 
+
+        //Ogrenci/OgrenciEkle
+        [HttpGet]
         public IActionResult OgrenciEkle() => View();
-       
+
 
 
     }
