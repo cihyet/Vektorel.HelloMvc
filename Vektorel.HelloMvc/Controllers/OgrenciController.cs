@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Vektorel.HelloMvc.Models;
 
 namespace Vektorel.HelloMvc.Controllers
@@ -16,14 +17,14 @@ namespace Vektorel.HelloMvc.Controllers
 
         public IActionResult OgrenciListesi()
         {
-            IEnumerable<Ogrenci> lst;
             using (var ctx = new OkulMvcContext())
             {
-                lst = ctx.Ogrenciler.ToList();
-            }           
-            return View(lst);
+                return View(ctx.Ogrenciler.ToList());
+            }
         }
 
+
+        //Cross Site Scripting Attck
         [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult OgrenciEkle(Ogrenci ogr)
@@ -31,18 +32,51 @@ namespace Vektorel.HelloMvc.Controllers
             using (OkulMvcContext ctx = new OkulMvcContext())
             {
                 ctx.Ogrenciler.Add(ogr);
-                ctx.SaveChanges();
+                int sonuc = ctx.SaveChanges();
+                sonuc = 0;
+                if (sonuc > 0)
+                {
+                    return RedirectToAction("OgrenciListesi");
+                }
             }
+            TempData["sonuc"] = 0;
             return View();
         }
-
-
 
         //Ogrenci/OgrenciEkle
         [HttpGet]
         public IActionResult OgrenciEkle() => View();
 
 
+        public IActionResult OgrenciDetay(int? id)
+        {
+            using (var ctx = new OkulMvcContext())
+            {
+                var ogr = ctx.Ogrenciler.Find(id);
+                return View(ogr);
+            }
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult OgrenciDetay(Ogrenci ogr)
+        {
+            using (var ctx=new OkulMvcContext())
+            {
+                ctx.Entry(ogr).State = EntityState.Modified;
+                ctx.SaveChanges();
+                return RedirectToAction("OgrenciListesi");
+            }
+        }
+
+        public IActionResult OgrenciSil(int? id)
+        {
+            using (var ctx=new OkulMvcContext())
+            {
+                ctx.Ogrenciler.Remove(ctx.Ogrenciler.Find(id));
+                ctx.SaveChanges();
+                return RedirectToAction("OgrenciListesi");
+            }
+        }
     }
 }

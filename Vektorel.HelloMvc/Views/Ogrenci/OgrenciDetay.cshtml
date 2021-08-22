@@ -1,15 +1,15 @@
-﻿
+﻿@model Ogrenci
 @{
-    ViewData["Title"] = "OgrenciEkle";
+    ViewData["Title"] = "OgrenciDetay";
 }
-@model Ogrenci
 
-<h1>Öğrenci Ekle</h1>
+<h1>Ogrenci Detay</h1>
 
-Html Helpers
-<form asp-action="OgrenciEkle" asp-controller="Ogrenci" method="post">
+<form asp-action="OgrenciDetay" asp-controller="Ogrenci" method="post">
 
     @*<input type="text" asp-for="Ad" class="form-control"/>*@
+
+    @Html.HiddenFor(o=>o.Ogrenciid)
 
     @Html.LabelFor(o => o.Ad, "Adı", new { @class = "form-label" })
     @Html.TextBoxFor(o => o.Ad, null, new { @class = "form-control" })
@@ -22,10 +22,3 @@ Html Helpers
 
     <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-success" />
 </form>
-
-@section Scripts{
-    @if (TempData["sonuc"] != null && (int)TempData["sonuc"] == 0)
-    {
-        <script>alert("Ekleme işleminde hata")</script>
-    }
-}

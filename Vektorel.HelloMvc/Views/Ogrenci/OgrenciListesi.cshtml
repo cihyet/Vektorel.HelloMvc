@@ -4,23 +4,29 @@
 }
 @model IEnumerable<Ogrenci>
 <h1>Ogrenci Listesi</h1>
+<a href="/Ogrenci/OgrenciEkle" class="btn btn-danger">Öğrenci Ekle</a>
+
+@Html.ActionLink("Öğrenci Ekle", "OgrenciEkle", "Ogrenci", null, new {@class="btn btn-danger" })
+
+<a asp-action="OgrenciEkle" asp-controller="Ogrenci" class="btn btn-danger">Öğrenci Ekle</a>
+
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Numara</th>
             <th>Ad</th>
             <th>Soyad</th>
+            <th>İşlem</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Ogrenciid</td>
+            <tr>               
                 <td>@item.Numara</td>
                 <td>@item.Ad</td>
                 <td>@item.Soyad</td>
+                <td><a href="/Ogrenci/OgrenciDetay/@item.Ogrenciid" class="btn btn-success btn-sm">Detaylar</a> <a href="/Ogrenci/OgrenciSil/@item.Ogrenciid" class="btn btn-danger btn-sm" onclick="return confirm('Emin misiniz?')">Sil</a></td>
             </tr>
         }
     </tbody>
